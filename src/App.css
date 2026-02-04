@@ -1,0 +1,474 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  overflow: hidden;
+  position: relative;
+  padding: 20px;
+}
+
+.success-bg {
+  background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+}
+
+/* Floating Hearts Background */
+.floating-hearts {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.floating-heart {
+  position: absolute;
+  bottom: -50px;
+  color: rgba(255, 255, 255, 0.3);
+  animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* Main Card */
+.card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 30px;
+  padding: 50px 40px;
+  text-align: center;
+  box-shadow:
+    0 25px 50px rgba(0, 0, 0, 0.15),
+    0 0 100px rgba(255, 105, 180, 0.3);
+  z-index: 1;
+  max-width: 450px;
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  animation: cardAppear 0.8s ease-out;
+}
+
+@keyframes cardAppear {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.card-emoji {
+  font-size: 80px;
+  margin-bottom: 20px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.title {
+  font-family: "Dancing Script", cursive;
+  font-size: 2.8rem;
+  color: #e91e63;
+  margin-bottom: 15px;
+  text-shadow: 2px 2px 4px rgba(233, 30, 99, 0.2);
+}
+
+.subtitle {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 35px;
+}
+
+/* Buttons */
+.button-container {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 16px 45px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.yes-button {
+  background: linear-gradient(135deg, #ff6b6b, #ee5a24, #ff6b6b);
+  background-size: 200% 200%;
+  color: white;
+  box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+  z-index: 1000;
+  touch-action: manipulation;
+  animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.yes-button:hover {
+  box-shadow: 0 15px 40px rgba(255, 107, 107, 0.6);
+}
+
+.no-button {
+  background: linear-gradient(135deg, #a8a8a8, #888);
+  color: white;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  cursor: not-allowed;
+  transition: all 0.3s ease;
+}
+
+.pop-animation {
+  animation: popMove 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes popMove {
+  0% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(0.3) rotate(180deg);
+  }
+  70% {
+    transform: scale(1.2) rotate(360deg);
+  }
+  100% {
+    transform: scale(1) rotate(360deg);
+  }
+}
+
+/* Success Screen */
+.success-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 30px;
+  padding: 60px 50px;
+  text-align: center;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  max-width: 450px;
+  width: 100%;
+  animation: successAppear 0.6s ease-out;
+}
+
+@keyframes successAppear {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.success-heart {
+  font-size: 100px;
+  animation: heartBeat 0.8s ease-in-out infinite;
+}
+
+@keyframes heartBeat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.2);
+  }
+  50% {
+    transform: scale(1);
+  }
+  75% {
+    transform: scale(1.3);
+  }
+}
+
+.success-title {
+  font-family: "Dancing Script", cursive;
+  font-size: 4rem;
+  color: #e91e63;
+  margin: 20px 0;
+}
+
+.success-message {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.success-submessage {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.hearts-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.bouncing-heart {
+  font-size: 2rem;
+  animation: bounce 0.6s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+/* Confetti */
+.confetti-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  top: -10px;
+  animation: confettiFall 3s linear infinite;
+}
+
+@keyframes confettiFall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 20px;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal {
+  background: linear-gradient(145deg, #ffffff, #fff5f8);
+  border-radius: 30px;
+  padding: 50px 40px;
+  text-align: center;
+  max-width: 420px;
+  width: 100%;
+  box-shadow:
+    0 30px 60px rgba(0, 0, 0, 0.3),
+    0 0 80px rgba(255, 105, 180, 0.4);
+  border: 2px solid rgba(255, 182, 193, 0.5);
+  animation: modalAppear 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes modalAppear {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.modal-emoji {
+  font-size: 80px;
+  margin-bottom: 15px;
+  animation: wiggle 0.5s ease-in-out infinite;
+}
+
+@keyframes wiggle {
+  0%,
+  100% {
+    transform: rotate(-5deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+}
+
+.modal-title {
+  font-family: "Dancing Script", cursive;
+  font-size: 2.5rem;
+  color: #e91e63;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(233, 30, 99, 0.2);
+}
+
+.modal-message {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.1rem;
+  color: #444;
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+.modal-submessage {
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+
+.modal-thanks {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.2rem;
+  color: #e91e63;
+  font-weight: 600;
+  margin-bottom: 25px;
+}
+
+.modal-yes-button {
+  background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+  color: white;
+  padding: 18px 50px;
+  font-size: 1.2rem;
+  box-shadow: 0 10px 30px rgba(255, 107, 107, 0.5);
+  animation: pulseButton 1.5s ease-in-out infinite;
+}
+
+.modal-yes-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 40px rgba(255, 107, 107, 0.7);
+}
+
+@keyframes pulseButton {
+  0%,
+  100% {
+    box-shadow: 0 10px 30px rgba(255, 107, 107, 0.5);
+  }
+  50% {
+    box-shadow: 0 10px 40px rgba(255, 107, 107, 0.8);
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 500px) {
+  .card,
+  .success-card {
+    padding: 40px 25px;
+    margin: 10px;
+  }
+
+  .title {
+    font-size: 2.2rem;
+  }
+
+  .card-emoji {
+    font-size: 60px;
+  }
+
+  .btn {
+    padding: 14px 35px;
+    font-size: 1rem;
+  }
+
+  .success-title {
+    font-size: 3rem;
+  }
+
+  .modal {
+    padding: 35px 25px;
+    margin: 15px;
+  }
+
+  .modal-emoji {
+    font-size: 60px;
+  }
+
+  .modal-title {
+    font-size: 2rem;
+  }
+
+  .modal-message {
+    font-size: 1rem;
+  }
+
+  .modal-yes-button {
+    padding: 15px 35px;
+    font-size: 1rem;
+  }
+}
