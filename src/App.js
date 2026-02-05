@@ -90,7 +90,7 @@ function App() {
         </div>
         <div className="success-card">
           <div className="success-heart">💖</div>
-          <h1 className="success-title">Yay!</h1>
+          <h1 className="success-title">Helly yes</h1>
           <p className="success-message">I knew you'd say yes</p>
           <p className="success-submessage">I think you're great!</p>
           <div className="hearts-row">
