@@ -203,7 +203,7 @@ function App() {
                 className="btn modal-continue-button"
                 onClick={handleModalContinue}
               >
-                *keeps being difficult* 😈
+                Let's try again 😈
               </button>
             </div>
           </div>
