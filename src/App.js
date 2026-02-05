@@ -39,6 +39,7 @@ function App() {
 
     // After 10 attempts, show the final modal
     if (newAttempts >= 10) {
+      alert(newAttempts);
       setCurrentModal("final");
       return;
     }
