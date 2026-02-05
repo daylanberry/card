@@ -66,8 +66,6 @@ function App() {
     setCurrentModal(null);
   };
 
-  console.log("currentModal:", currentModal);
-
   if (accepted) {
     return (
       <div className="container success-bg">
@@ -120,9 +118,7 @@ function App() {
             <div className="modal-emoji">🐌</div>
             <h2 className="modal-title">Seriously?!</h2>
             <p className="modal-message">That was your attempt? Sad</p>
-            <p className="modal-submessage">
-              Do you even care? Because that was embarrassing to watch. 😒
-            </p>
+            <p className="modal-submessage">Do you even care?</p>
             <div className="modal-buttons">
               <button
                 className="btn modal-continue-button"
@@ -162,9 +158,6 @@ function App() {
               5 whole attempts and you STILL haven't said yes?! That's kinda
               fucked up.
             </p>
-            <p className="modal-submessage">
-              I'm over here pouring my heart out and this is what I get?
-            </p>
             <p className="modal-rude">
               Hey Bestie, that's fuckin rude... I'm not even mad tho
             </p>
@@ -188,10 +181,10 @@ function App() {
             <div className="modal-emoji">😅</div>
             <h2 className="modal-title">Okay, okay, you win!</h2>
             <p className="modal-message">
-              After {attempts} attempts, I admire your persistence!
+              After {attempts} attempts, I admire you
             </p>
             <p className="modal-submessage">
-              You clearly REALLY want to be my Valentine...
+              You REALLY REALLY want to be my Valentine...
             </p>
             <p className="modal-thanks">Thanks for not giving up on us! 💕</p>
             <button className="btn modal-yes-button" onClick={handleModalYes}>
