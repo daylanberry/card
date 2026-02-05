@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import "./App.css";
 
 function App() {
@@ -10,6 +10,7 @@ function App() {
   const [yesSize, setYesSize] = useState(1);
   const [attempts, setAttempts] = useState(0);
   const [currentModal, setCurrentModal] = useState(null);
+  const isMoving = useRef(false);
 
   const floatingHearts = Array.from({ length: 15 }, (_, i) => ({
     id: i,
@@ -21,6 +22,13 @@ function App() {
 
   const moveButton = (e) => {
     e.preventDefault();
+
+    // Prevent multiple rapid fires
+    if (isMoving.current || currentModal) return;
+    isMoving.current = true;
+    setTimeout(() => {
+      isMoving.current = false;
+    }, 300);
 
     const newAttempts = attempts + 1;
     setAttempts(newAttempts);
@@ -39,7 +47,6 @@ function App() {
 
     // After 10 attempts, show the final modal
     if (newAttempts >= 10) {
-      alert(newAttempts);
       setCurrentModal("final");
       return;
     }
