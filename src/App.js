@@ -22,12 +22,40 @@ function App() {
   const doMoveButton = useCallback(() => {
     setIsAnimating(true);
     setNoSize((prev) => Math.max(0.4, prev - 0.1));
-    setYesSize((prev) => prev + 0.1);
-    const maxX = window.innerWidth - 120;
-    const maxY = window.innerHeight - 60;
-    const newX = Math.max(10, Math.random() * maxX);
-    const newY = Math.max(10, Math.random() * maxY);
-    setYesPosition({ top: newY, left: newX });
+    setYesSize((prev) => {
+      const newSize = prev + 0.1;
+
+      // Account for scaled button size
+      const baseWidth = 100;
+      const baseHeight = 45;
+      const buttonWidth = baseWidth * newSize;
+      const buttonHeight = baseHeight * newSize;
+      const padding = 30;
+
+      // Use visualViewport for mobile, fallback to window
+      const viewportWidth = window.visualViewport?.width || window.innerWidth;
+      const viewportHeight =
+        window.visualViewport?.height || window.innerHeight;
+
+      // Calculate safe boundaries
+      const maxX = viewportWidth - buttonWidth - padding;
+      const maxY = viewportHeight - buttonHeight - padding;
+      const minX = padding;
+      const minY = padding;
+
+      // Ensure min values don't exceed max values on very small screens
+      const safeMaxX = Math.max(minX, maxX);
+      const safeMaxY = Math.max(minY, maxY);
+
+      // Generate random position within safe bounds
+      const newX = minX + Math.random() * (safeMaxX - minX);
+      const newY = minY + Math.random() * (safeMaxY - minY);
+
+      setYesPosition({ top: newY, left: newX });
+
+      return newSize;
+    });
+
     setTimeout(() => setIsAnimating(false), 400);
   }, []);
 
