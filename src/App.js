@@ -179,13 +179,12 @@ function App() {
                 className="btn modal-continue-button"
                 onClick={handleModalContinue}
               >
-                You better try change your mind
+                You better change your mind
               </button>
             </div>
           </div>
         </div>
       )}
-
       {/* Rude Modal - 5 attempts */}
       {currentModal === "rude" && (
         <div className="modal-overlay">
@@ -210,7 +209,6 @@ function App() {
           </div>
         </div>
       )}
-
       {/* Final Modal - 10 attempts */}
       {currentModal === "final" && (
         <div className="modal-overlay">
@@ -230,7 +228,6 @@ function App() {
           </div>
         </div>
       )}
-
       <div className="floating-hearts">
         {floatingHearts.map((heart) => (
           <div
@@ -247,7 +244,6 @@ function App() {
           </div>
         ))}
       </div>
-
       <div className="card">
         <div className="card-emoji">🌹</div>
         <h1 className="title">Will you be my Valentine?</h1>
