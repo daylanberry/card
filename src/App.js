@@ -8,7 +8,7 @@ function App() {
   const [noSize, setNoSize] = useState(1);
   const [yesSize, setYesSize] = useState(1);
   const [attempts, setAttempts] = useState(0);
-  const [showModal, setShowModal] = useState(false);
+  const [currentModal, setCurrentModal] = useState(null);
 
   const floatingHearts = Array.from({ length: 15 }, (_, i) => ({
     id: i,
@@ -24,9 +24,21 @@ function App() {
     const newAttempts = attempts + 1;
     setAttempts(newAttempts);
 
-    // After 10 attempts, show the modal instead of moving
+    // First attempt - "Do you even care?" modal
+    if (newAttempts === 1) {
+      setCurrentModal("first");
+      return;
+    }
+
+    // After 5 attempts - "How rude!" modal
+    if (newAttempts === 5) {
+      setCurrentModal("rude");
+      return;
+    }
+
+    // After 10 attempts, show the final modal
     if (newAttempts >= 10) {
-      setShowModal(true);
+      setCurrentModal("final");
       return;
     }
 
@@ -46,8 +58,12 @@ function App() {
   };
 
   const handleModalYes = () => {
-    setShowModal(false);
+    setCurrentModal(null);
     setAccepted(true);
+  };
+
+  const handleModalContinue = () => {
+    setCurrentModal(null);
   };
 
   if (accepted) {
@@ -97,8 +113,59 @@ function App() {
 
   return (
     <div className="container">
-      {/* Modal */}
-      {showModal && (
+      {/* First Attempt Modal */}
+      {currentModal === "first" && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <div className="modal-emoji">🐌</div>
+            <h2 className="modal-title">Seriously?!</h2>
+            <p className="modal-message">That was your attempt? Sad</p>
+            <p className="modal-submessage">
+              Do you even care? Because that was embarrassing to watch. 😒
+            </p>
+            <div className="modal-buttons">
+              <button
+                className="btn modal-continue-button"
+                onClick={handleModalContinue}
+              >
+                Fine, I'll try harder 😤
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Rude Modal - 5 attempts */}
+      {currentModal === "rude" && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <div className="modal-emoji">😤</div>
+            <h2 className="modal-title">WOW. Just WOW.</h2>
+            <p className="modal-message">
+              5 whole attempts and you STILL haven't said yes?! That's kinda
+              fucked up.
+            </p>
+            <p className="modal-submessage">
+              I'm over here pouring my heart out and this is what I get?
+            </p>
+            <p className="modal-rude">
+              Hey Bestie, that's fuckin rude... I'm not even mad tho
+            </p>
+            <p className="modal-thanks">(Okay maybe a little mad) 😠💔</p>
+            <div className="modal-buttons">
+              <button
+                className="btn modal-continue-button"
+                onClick={handleModalContinue}
+              >
+                *keeps being difficult* 😈
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Final Modal - 10 attempts */}
+      {currentModal === "final" && (
         <div className="modal-overlay">
           <div className="modal">
             <div className="modal-emoji">😅</div>

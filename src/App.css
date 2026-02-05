@@ -425,6 +425,35 @@
   }
 }
 
+.modal-rude {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.1rem;
+  color: #d32f2f;
+  font-weight: 600;
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+.modal-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.modal-continue-button {
+  background: linear-gradient(135deg, #9e9e9e, #757575);
+  color: white;
+  padding: 14px 40px;
+  font-size: 1rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.modal-continue-button:hover {
+  transform: scale(1.03);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
 /* Mobile Responsive */
 @media (max-width: 500px) {
   .card,
@@ -470,5 +499,14 @@
   .modal-yes-button {
     padding: 15px 35px;
     font-size: 1rem;
+  }
+
+  .modal-buttons {
+    gap: 10px;
+  }
+
+  .modal-continue-button {
+    padding: 12px 30px;
+    font-size: 0.9rem;
   }
 }
