@@ -154,8 +154,8 @@ function App() {
         <div className="modal-overlay">
           <div className="modal">
             <div className="modal-emoji">🐌</div>
-            <h2 className="modal-title">Seriously?!</h2>
-            <p className="modal-message">That was your attempt? Sad</p>
+            <h2 className="modal-title">You for real?</h2>
+            <p className="modal-message">That was your attempt?</p>
             <p className="modal-submessage">Do you even care?</p>
             <div className="modal-buttons">
               <button
