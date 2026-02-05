@@ -34,6 +34,8 @@ function App() {
     const newAttempts = attempts + 1;
     setAttempts(newAttempts);
 
+    alert(attempts);
+
     // First attempt - "Do you even care?" modal
     if (newAttempts === 1) {
       setCurrentModal("first");
