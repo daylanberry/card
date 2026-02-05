@@ -1,16 +1,15 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import "./App.css";
 
 function App() {
   const [yesPosition, setYesPosition] = useState({ top: null, left: null });
-  const [clickedNo, setClickedNo] = useState(false);
   const [accepted, setAccepted] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const [noSize, setNoSize] = useState(1);
   const [yesSize, setYesSize] = useState(1);
   const [attempts, setAttempts] = useState(0);
   const [currentModal, setCurrentModal] = useState(null);
-  const isMoving = useRef(false);
+  const lastMoveTime = useRef(0);
 
   const floatingHearts = Array.from({ length: 15 }, (_, i) => ({
     id: i,
@@ -20,38 +19,7 @@ function App() {
     size: 15 + Math.random() * 20,
   }));
 
-  const moveButton = (e) => {
-    e.preventDefault();
-
-    // Prevent multiple rapid fires
-    if (isMoving.current || currentModal) return;
-    isMoving.current = true;
-    setTimeout(() => {
-      isMoving.current = false;
-    }, 300);
-
-    const newAttempts = attempts + 1;
-    setAttempts(newAttempts);
-
-    // First attempt - "Do you even care?" modal
-    if (newAttempts === 1) {
-      setCurrentModal("first");
-      return;
-    }
-
-    // After 5 attempts - "How rude!" modal
-    if (newAttempts === 5) {
-      setCurrentModal("rude");
-      return;
-    }
-
-    // After 10 attempts, show the final modal
-    if (newAttempts >= 10) {
-      setCurrentModal("final");
-      return;
-    }
-
-    // Only move button if no modal is shown
+  const doMoveButton = useCallback(() => {
     setIsAnimating(true);
     setNoSize((prev) => Math.max(0.4, prev - 0.1));
     setYesSize((prev) => prev + 0.1);
@@ -61,7 +29,39 @@ function App() {
     const newY = Math.max(10, Math.random() * maxY);
     setYesPosition({ top: newY, left: newX });
     setTimeout(() => setIsAnimating(false), 400);
-  };
+  }, []);
+
+  const moveButton = useCallback(
+    (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      // Debounce - ignore if called within 500ms
+      const now = Date.now();
+      if (now - lastMoveTime.current < 500) return;
+      if (currentModal) return;
+      lastMoveTime.current = now;
+
+      setAttempts((prevAttempts) => {
+        const newAttempts = prevAttempts + 1;
+
+        // Always move the button first
+        doMoveButton();
+
+        // Then show modal based on attempt count
+        if (newAttempts === 1) {
+          setTimeout(() => setCurrentModal("first"), 100);
+        } else if (newAttempts === 5) {
+          setTimeout(() => setCurrentModal("rude"), 100);
+        } else if (newAttempts >= 10) {
+          setTimeout(() => setCurrentModal("final"), 100);
+        }
+
+        return newAttempts;
+      });
+    },
+    [currentModal, doMoveButton],
+  );
 
   const handleYesClick = () => {
     setAccepted(true);
@@ -240,6 +240,7 @@ function App() {
             }}
             onMouseEnter={moveButton}
             onTouchStart={moveButton}
+            onTouchEnd={(e) => e.preventDefault()}
             onClick={handleYesClick}
           >
             Yes! 💕
