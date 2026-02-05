@@ -22,19 +22,8 @@ function App() {
   const moveButton = (e) => {
     e.preventDefault();
 
-    setIsAnimating(true);
-    setNoSize((prev) => Math.max(0.4, prev - 0.1));
-    setYesSize((prev) => prev + 0.1);
-    const maxX = window.innerWidth - 120;
-    const maxY = window.innerHeight - 60;
-    const newX = Math.max(10, Math.random() * maxX);
-    const newY = Math.max(10, Math.random() * maxY);
-    setYesPosition({ top: newY, left: newX });
-    setTimeout(() => setIsAnimating(false), 400);
     const newAttempts = attempts + 1;
     setAttempts(newAttempts);
-
-    alert(attempts);
 
     // First attempt - "Do you even care?" modal
     if (newAttempts === 1) {
@@ -53,6 +42,17 @@ function App() {
       setCurrentModal("final");
       return;
     }
+
+    // Only move button if no modal is shown
+    setIsAnimating(true);
+    setNoSize((prev) => Math.max(0.4, prev - 0.1));
+    setYesSize((prev) => prev + 0.1);
+    const maxX = window.innerWidth - 120;
+    const maxY = window.innerHeight - 60;
+    const newX = Math.max(10, Math.random() * maxX);
+    const newY = Math.max(10, Math.random() * maxY);
+    setYesPosition({ top: newY, left: newX });
+    setTimeout(() => setIsAnimating(false), 400);
   };
 
   const handleYesClick = () => {
