@@ -155,15 +155,14 @@ function App() {
         <div className="modal-overlay">
           <div className="modal">
             <div className="modal-emoji">😤</div>
-            <h2 className="modal-title">WOW. Just WOW.</h2>
+            <h2 className="modal-title">WOW.</h2>
             <p className="modal-message">
               5 whole attempts and you STILL haven't said yes?! That's kinda
               fucked up.
             </p>
             <p className="modal-rude">
-              Hey Bestie, that's fuckin rude... I'm not even mad tho
+              Hey Bestie, that's pretty fuckin rude...
             </p>
-            <p className="modal-thanks">(Okay maybe a little mad) 😠💔</p>
             <div className="modal-buttons">
               <button
                 className="btn modal-continue-button"
