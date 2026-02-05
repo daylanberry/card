@@ -3,6 +3,7 @@ import "./App.css";
 
 function App() {
   const [yesPosition, setYesPosition] = useState({ top: null, left: null });
+  const [clickedNo, setClickedNo] = useState(false);
   const [accepted, setAccepted] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const [noSize, setNoSize] = useState(1);
@@ -21,6 +22,15 @@ function App() {
   const moveButton = (e) => {
     e.preventDefault();
 
+    setIsAnimating(true);
+    setNoSize((prev) => Math.max(0.4, prev - 0.1));
+    setYesSize((prev) => prev + 0.1);
+    const maxX = window.innerWidth - 120;
+    const maxY = window.innerHeight - 60;
+    const newX = Math.max(10, Math.random() * maxX);
+    const newY = Math.max(10, Math.random() * maxY);
+    setYesPosition({ top: newY, left: newX });
+    setTimeout(() => setIsAnimating(false), 400);
     const newAttempts = attempts + 1;
     setAttempts(newAttempts);
 
@@ -41,16 +51,6 @@ function App() {
       setCurrentModal("final");
       return;
     }
-
-    setIsAnimating(true);
-    setNoSize((prev) => Math.max(0.4, prev - 0.1));
-    setYesSize((prev) => prev + 0.1);
-    const maxX = window.innerWidth - 120;
-    const maxY = window.innerHeight - 60;
-    const newX = Math.max(10, Math.random() * maxX);
-    const newY = Math.max(10, Math.random() * maxY);
-    setYesPosition({ top: newY, left: newX });
-    setTimeout(() => setIsAnimating(false), 400);
   };
 
   const handleYesClick = () => {
@@ -65,6 +65,8 @@ function App() {
   const handleModalContinue = () => {
     setCurrentModal(null);
   };
+
+  console.log("currentModal:", currentModal);
 
   if (accepted) {
     return (
@@ -91,10 +93,8 @@ function App() {
         <div className="success-card">
           <div className="success-heart">💖</div>
           <h1 className="success-title">Yay!</h1>
-          <p className="success-message">I knew you'd say yes!</p>
-          <p className="success-submessage">
-            You've made me the happiest person! 🥰
-          </p>
+          <p className="success-message">I knew you'd say yes</p>
+          <p className="success-submessage">I think you're great!</p>
           <div className="hearts-row">
             {["💕", "💗", "💖", "💗", "💕"].map((heart, i) => (
               <span
@@ -129,6 +129,23 @@ function App() {
                 onClick={handleModalContinue}
               >
                 Fine, I'll try harder 😤
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      {currentModal === "rejected" && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <div className="modal-emoji">😤</div>
+            <h2 className="modal-title">Dead to me</h2>
+            <p className="modal-message">LMN</p>
+            <div className="modal-buttons">
+              <button
+                className="btn modal-continue-button"
+                onClick={handleModalContinue}
+              >
+                You better try change your mind
               </button>
             </div>
           </div>
@@ -174,8 +191,7 @@ function App() {
               After {attempts} attempts, I admire your persistence!
             </p>
             <p className="modal-submessage">
-              You clearly REALLY want to be my Valentine... and honestly? That's
-              adorable. 🥺
+              You clearly REALLY want to be my Valentine...
             </p>
             <p className="modal-thanks">Thanks for not giving up on us! 💕</p>
             <button className="btn modal-yes-button" onClick={handleModalYes}>
@@ -229,9 +245,9 @@ function App() {
           <button
             className="btn no-button"
             style={{ transform: `scale(${noSize})` }}
-            disabled
+            onClick={() => setCurrentModal("rejected")}
           >
-            No 😢
+            No! 😢
           </button>
         </div>
       </div>

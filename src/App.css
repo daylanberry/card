@@ -157,7 +157,6 @@
   background: linear-gradient(135deg, #a8a8a8, #888);
   color: white;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  cursor: not-allowed;
   transition: all 0.3s ease;
 }
 
